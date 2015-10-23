@@ -1,0 +1,9 @@
+bap
+stamp
+pin
+src/_build
+*.native
+src/symfuzz
+src/depreader
+src/instrumentor/obj-ia32
+src/pinapi/obj-ia32
