@@ -547,6 +547,7 @@ VOID SyscallEntry( THREADID tid, CONTEXT* ctxt, SYSCALL_STANDARD std, VOID* v )
         p_tls->arg1 = PIN_GetSyscallArgument( ctxt, std, 1 );
         p_tls->arg2 = PIN_GetSyscallArgument( ctxt, std, 2 );
         break;
+#ifdef SYS__llseek
     case SYS__llseek:
         p_tls->arg0 = PIN_GetSyscallArgument( ctxt, std, 0 );
         p_tls->arg1 = PIN_GetSyscallArgument( ctxt, std, 1 );
@@ -554,6 +555,7 @@ VOID SyscallEntry( THREADID tid, CONTEXT* ctxt, SYSCALL_STANDARD std, VOID* v )
         p_tls->arg3 = PIN_GetSyscallArgument( ctxt, std, 3 );
         p_tls->arg4 = PIN_GetSyscallArgument( ctxt, std, 4 );
         break;
+#endif
     default:
         break;
     }
@@ -653,10 +655,12 @@ VOID SyscallExit( THREADID tid, CONTEXT* ctxt, SYSCALL_STANDARD std, VOID* v )
     case SYS_lseek:
         syscall_post_lseek( p_tls->arg0, PIN_GetSyscallReturn( ctxt, std ) );
         break;
+#ifdef SYS__llseek
     case SYS__llseek:
         syscall_post__llseek( p_tls->arg0, p_tls->arg3,
                               PIN_GetSyscallReturn( ctxt, std ) );
         break;
+#endif
     default:
         break;
     }

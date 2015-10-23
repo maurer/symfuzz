@@ -73,12 +73,12 @@ LIB_ROOTS :=
 # This section contains the build rules for all binaries that have special build rules.
 # See makefile.default.rules for the default build rules.
 
-OCAMLPATH = $(shell ocamlfind printconf path)/ocaml
+OCAMLPATH = $(shell ocamlfind printconf stdlib)
 TOOLS := $(TEST_TOOL_ROOTS:%=$(OBJDIR)%$(PINTOOL_SUFFIX)) $(TOOL_ROOTS:%=$(OBJDIR)%$(PINTOOL_SUFFIX))
 SRCS := $(wildcard *.cpp)
 OBJS := $(SRCS:%.cpp=$(OBJDIR)%.o)
 CAMLIDL_FLAG := -I$(OCAMLPATH)
-LIBPINAPI_FLAGS := -Wl,--no-undefined -L$(OCAMLPATH) -lunix -lasmrun
+LIBPINAPI_FLAGS := -Wl,--no-undefined -L$(OCAMLPATH) -lunix -lasmrun_pic
 LIBPINAPI := $(OBJDIR)/libpinapi.so.1
 LIBPINAPI_DIR := ../_build/pinapi/
 LIBPINAPI_PATH := $(LIBPINAPI_DIR)pinapi.o

@@ -13,29 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                        #
 ###############################################################################
 
-all: depcheck PIN src
-
-stamp:
-	mkdir -p stamp
-
-stamp/pindownload:
-	wget 'http://software.intel.com/sites/landingpage/pintool/downloads/pin-2.14-67254-gcc.4.4.7-linux.tar.gz' \
-		&& touch stamp/pindownload
-
-stamp/pinunpack:
-	tar xfz pin-2.14-67254-gcc.4.4.7-linux.tar.gz \
-		&& mv pin-2.14-67254-gcc.4.4.7-linux pin \
-		&& touch stamp/pinunpack
-
-stamp/pinrm:
-	rm -f pin-2.14-67254-gcc.4.4.7-linux.tar.gz \
-		&& touch stamp/pinrm
-
-stamp/srcconf:
-	cd src; ./configure \
-		&& touch ../stamp/srcconf
-
-PIN: stamp stamp/pindownload stamp/pinunpack stamp/pinrm
+all: depcheck src
 
 src:
 	make -C src
@@ -44,7 +22,6 @@ depcheck: Makefile.dep
 	@buildtools/depcheck.sh $<
 
 clean:
-	rm -rf stamp
 	make -C src clean
 
-.PHONY: all PIN src depcheck clean
+.PHONY: all src depcheck clean

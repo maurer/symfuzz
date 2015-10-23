@@ -23,6 +23,7 @@ TARGET_BINARY=symfuzz
 all: depcheck
 	make -C pinapi
 	$(OCAMLBUILD) -no-links $(OFUZZ_SUBDIRS) \
+		-lflag -runtime-variant -lflag _pic \
 		symfuzz.native libanalysis.native depreader.native
 	make -C instrumentor
 	ln -sf _build/analyzer/symfuzz.native $(TARGET_BINARY)

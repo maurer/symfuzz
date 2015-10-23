@@ -73,13 +73,13 @@ LIB_ROOTS :=
 # This section contains the build rules for all binaries that have special build rules.
 # See makefile.default.rules for the default build rules.
 
-OCAMLPATH = $(shell ocamlfind printconf path)/ocaml
+OCAMLPATH = $(shell ocamlfind printconf stdlib)
 TOOLS := $(TEST_TOOL_ROOTS:%=$(OBJDIR)%$(PINTOOL_SUFFIX)) $(TOOL_ROOTS:%=$(OBJDIR)%$(PINTOOL_SUFFIX))
 SRCS := $(wildcard *.cpp)
 OBJS := $(SRCS:%.cpp=$(OBJDIR)%.o)
 CAMLIDL_FLAG := -I$(OCAMLPATH)
 LIBANALYSIS_PATH := ../_build
-LIBANALYSIS_FLAG := -Wl,--no-undefined -L$(OCAMLPATH) -L$(LIBANALYSIS_PATH) -lanalysis -lunix -lasmrun
+LIBANALYSIS_FLAG := -Wl,--no-undefined -L$(OCAMLPATH) -L$(LIBANALYSIS_PATH) -lanalysis -lunix -lasmrun_pic
 ANALYSIS_API := $(OBJDIR)analysis_api$(OBJ_SUFFIX)
 DBG=-g
 

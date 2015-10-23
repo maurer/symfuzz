@@ -12,7 +12,7 @@ let pin_path =
 let instrumentor_path =
   let path =
     if Nativeint.size = 64 then
-      Filename.concat toolroot "src/instrumentor/obj-ia64/symfuzz.so"
+      Filename.concat toolroot "src/instrumentor/obj-intel64/symfuzz.so"
     else
       Filename.concat toolroot "src/instrumentor/obj-ia32/symfuzz.so"
   in

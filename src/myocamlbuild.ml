@@ -73,6 +73,7 @@ let getline_from_cmd cmd =
 
 (* ocaml path *)
 let ocamlpath = getline_from_cmd "ocamlfind printconf path"
+let camlidlpath = getline_from_cmd "ocamlfind query camlidl"
 
 (* read clib file and make P *)
 let read_clib file =
@@ -141,10 +142,10 @@ let _ = dispatch begin function
 
       (* c stub generated from camlidl *)
       flag ["c"; "compile"; "stubs"]
-        (S[A"-ccopt";A("-I"^ocamlpath^"/camlidl");]);
+        (S[A"-ccopt";A("-I"^camlidlpath);]);
 
       flag ["cpp"; "compile"; "stubs"]
-        (S[A("-I"^ocamlpath^"/ocaml");A("-I"^ocamlpath^"/camlidl");]);
+        (S[A("-I"^ocamlpath^"/ocaml");A("-I"^camlidlpath);]);
 
       flag ["c"; "compile"; "file:analyzer/pinapi_stubs.c"]
         (S[A"-ccopt"; A"-I../pinapi"]);
