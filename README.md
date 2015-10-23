@@ -23,4 +23,10 @@ We recommend using OPAM for building SymFuzz.
 
 4. Build SymFuzz
 
-   make
+   1. Download and unpack pin
+
+     ./fetch-pin.sh
+
+   2. Build SymFuzz
+
+     make
